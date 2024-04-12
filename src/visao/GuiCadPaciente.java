@@ -176,11 +176,17 @@ public class GuiCadPaciente extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, "Por favor, preencha o campo 'Nome' (até 55 caracteres).");
                 return;
             }
-            pac.setNome(jtNome.getText());
             pac.setEndereco(jtEndereco.getText());
+            
+            // Verificando se o campo endereço está vazio ou excede o limite de caracteres
+            
+            if (jtEndereco.getText().isEmpty() || jtEndereco.getText().length() > 200) {
+                JOptionPane.showMessageDialog(this, "Por favor, preencha o campo 'Endereço' (até 200 caracteres).");
+                return;
+            }
             pac.setDataNascimento(sdf.parse(jtDataNasc.getText()));
             
-            // Verificando se o campo de data de nascimento está preenchido e se está no formato correto
+            // Verificando se o campo de data de nascimento está preenchido e se está no formato correto xx/xx/xxxx
             
             if (!jtDataNasc.getText().isEmpty() && jtDataNasc.getText().matches("\\d{2}/\\d{2}/\\d{4}")) {
                 pac.setDataNascimento(sdf.parse(jtDataNasc.getText()));
@@ -190,6 +196,12 @@ public class GuiCadPaciente extends javax.swing.JInternalFrame {
                 return;
             }
             pac.setTelefone(jtTelefone.getText());
+            
+            // Verificando se o campo Telefone está preenchido e se está no formato correto (xx)xxxx-xxxx
+            if (jtTelefone.getText().isEmpty() || !jtTelefone.getText().matches("\\(\\d{2}\\)\\d{4}-\\d{4}")) {
+            JOptionPane.showMessageDialog(this, "Por favor, preencha o campo de telefone no formato (xx)xxxx-xxxx.");
+            return;
+        }
             pac.setCpf(jtCpf.getText());
             pac.setRg(jtRG.getText());
 
