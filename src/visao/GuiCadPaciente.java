@@ -169,9 +169,19 @@ public class GuiCadPaciente extends javax.swing.JInternalFrame {
 
             // Atribuindo valores aos atributos do Paciente com base nos campos preenchidos pelo usuário na tela
             pac.setNome(jtNome.getText());
+            
+            // Verificando se o campo nome está vazio ou excede o limite de caracteres
+            
+            if (jtNome.getText().isEmpty() || jtNome.getText().length() > 55) {
+                JOptionPane.showMessageDialog(this, "Por favor, preencha o campo 'Nome' (até 55 caracteres).");
+                return;
+            }
+            pac.setNome(jtNome.getText());
             pac.setEndereco(jtEndereco.getText());
             pac.setDataNascimento(sdf.parse(jtDataNasc.getText()));
+            
             // Verificando se o campo de data de nascimento está preenchido e se está no formato correto
+            
             if (!jtDataNasc.getText().isEmpty() && jtDataNasc.getText().matches("\\d{2}/\\d{2}/\\d{4}")) {
                 pac.setDataNascimento(sdf.parse(jtDataNasc.getText()));
             } else {
@@ -185,7 +195,6 @@ public class GuiCadPaciente extends javax.swing.JInternalFrame {
 
             // Verificando se um convênio foi selecionado no JComboBox
             if (!(jcConvenio.getSelectedIndex() == 0)
-                    && !jtNome.getText().isEmpty()
                     && !jtEndereco.getText().isEmpty()
                     && !jtTelefone.getText().isEmpty()
                     && !jtCpf.getText().isEmpty()
