@@ -171,6 +171,14 @@ public class GuiCadPaciente extends javax.swing.JInternalFrame {
             pac.setNome(jtNome.getText());
             pac.setEndereco(jtEndereco.getText());
             pac.setDataNascimento(sdf.parse(jtDataNasc.getText()));
+            // Verificando se o campo de data de nascimento está preenchido e se está no formato correto
+            if (!jtDataNasc.getText().isEmpty() && jtDataNasc.getText().matches("\\d{2}/\\d{2}/\\d{4}")) {
+                pac.setDataNascimento(sdf.parse(jtDataNasc.getText()));
+            } else {
+                // Se o campo de data estiver vazio ou no formato incorreto, exiba uma mensagem de erro e retorne do método
+                JOptionPane.showMessageDialog(this, "Por favor, preencha a data de nascimento no formato dd/MM/yyyy.");
+                return;
+            }
             pac.setTelefone(jtTelefone.getText());
             pac.setCpf(jtCpf.getText());
             pac.setRg(jtRG.getText());
@@ -179,7 +187,6 @@ public class GuiCadPaciente extends javax.swing.JInternalFrame {
             if (!(jcConvenio.getSelectedIndex() == 0)
                     && !jtNome.getText().isEmpty()
                     && !jtEndereco.getText().isEmpty()
-                    && !jtDataNasc.getText().isEmpty()
                     && !jtTelefone.getText().isEmpty()
                     && !jtCpf.getText().isEmpty()
                     && !jtRG.getText().isEmpty()) {
