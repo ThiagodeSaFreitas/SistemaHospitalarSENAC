@@ -1,4 +1,3 @@
-
 package visao;
 
 import dao.ConvenioDAO;
@@ -177,7 +176,13 @@ public class GuiCadPaciente extends javax.swing.JInternalFrame {
             pac.setRg(jtRG.getText());
 
             // Verificando se um convênio foi selecionado no JComboBox
-            if (!(jcConvenio.getSelectedIndex() == 0)) {
+            if (!(jcConvenio.getSelectedIndex() == 0)
+                    && !jtNome.getText().isEmpty()
+                    && !jtEndereco.getText().isEmpty()
+                    && !jtDataNasc.getText().isEmpty()
+                    && !jtTelefone.getText().isEmpty()
+                    && !jtCpf.getText().isEmpty()
+                    && !jtRG.getText().isEmpty()) {
 
                 // Obtendo o nome do convênio selecionado pelo usuário
                 String conv = jcConvenio.getSelectedItem().toString();
@@ -193,10 +198,10 @@ public class GuiCadPaciente extends javax.swing.JInternalFrame {
 
             } else {
                 JOptionPane.showMessageDialog(this,
-                        "Selecione um produto");
+                        "Por favor, verifique se todos os campos estão preenchidos corretamente e selecione um convênio.");
             } // fecha else
 
-           // Criando objeto PacienteDAO para cadastrar o paciente no banco de dados
+            // Criando objeto PacienteDAO para cadastrar o paciente no banco de dados
             PacienteDAO pacDAO = new PacienteDAO();
             pacDAO.cadastrarPaciente(pac);
 
@@ -217,7 +222,6 @@ public class GuiCadPaciente extends javax.swing.JInternalFrame {
         jtCpf.setText("");
     }// fecha método
 
-    
     // metodo para preencher o combo box com os produtos cadastrados no banco de dados
     private void preencherCombo() {
         try {
