@@ -38,6 +38,10 @@ public class Paciente {
         this.convenio = convenio;
     }
 
+    
+
+    
+
     public String getEmail() {
         return email;
     }
